@@ -39,6 +39,10 @@ class AppDependencyContainer {
       DashboardViewModel(dashboardService: dashboardService)
    }
 
+   func makeProductListViewModel() -> ProductListViewModel {
+      ProductListViewModel(productRepository: productRepository)
+   }
+   
 }
 
 extension AppDependencyContainer {

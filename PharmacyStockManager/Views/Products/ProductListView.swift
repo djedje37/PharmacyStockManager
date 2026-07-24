@@ -8,11 +8,46 @@
 import SwiftUI
 
 struct ProductListView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+   
+   @State private var viewModel : ProductListViewModel
+   
+   init(dependencyContainer: AppDependencyContainer) {
+      _viewModel = State(wrappedValue: dependencyContainer.makeProductListViewModel())
+   }
+   var body: some View {
+      NavigationStack {
+         
+         Group {
+            switch viewModel.state {
+            case .loading:
+               ProgressView()
+            case .loaded(let products):
+               List(products) { product in
+                  NavigationLink(value: product){
+                     ProductRowView(product: product)
+                  }
+               }
+             //  .listStyle(.plain)
+            case .error(let error):
+               ContentUnavailableView(error, systemImage: "exclamationmark.triangle")
+               
+            }
+         }
+         .navigationTitle("ProductList")
+         .navigationDestination(for: Product.self) { product in
+            ProductDetailView(product: product)
+         }
+         
+      }
+      .task {
+         await viewModel.loadProducts()
+      }
+
+         
+   
+   }
 }
 
 #Preview {
-    ProductListView()
+   ProductListView(dependencyContainer: .preview)
 }

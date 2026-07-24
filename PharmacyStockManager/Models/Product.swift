@@ -62,6 +62,11 @@ class Product  {
       totalStock <= alertThreshold
    }
    
+   var averagePurchasePrice: Double {
+      guard totalStock > 0 else { return 0 }
+      return stockValueAtCost / Double(totalStock)
+   }
+   
    var isReimbursed : Bool {
       reimbursementBase > 0
    }

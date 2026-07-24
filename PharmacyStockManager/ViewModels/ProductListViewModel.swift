@@ -5,14 +5,30 @@
 //  Created by Djeneba KANE on 14/06/2026.
 //
 
-import SwiftUI
 import SwiftData
+import Foundation
 
-class ProductListViewModel: Observable {
-   @Query private var products: [Product]
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+
+@Observable
+@MainActor
+class ProductListViewModel {
+   
+   private let productRepository : ProductRepository
+   var state: ViewState<[Product]> = .loading
+   init(productRepository: ProductRepository) {
+      self.productRepository = productRepository
+   }
+   
+   func loadProducts() async {
+      do {
+         let product = try productRepository.fetchAll()
+         state = .loaded(product)
+         
+      } catch {
+         state = .error(error.localizedDescription)
+      }
+   }
+
 }
 
 

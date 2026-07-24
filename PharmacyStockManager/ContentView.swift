@@ -18,7 +18,7 @@ struct ContentView: View {
             .tabItem {
                Label("Dashboard", systemImage: "chart.pie")
             }
-         ProductListView()
+         ProductListView(dependencyContainer: appDependencyContainer)
             .tabItem {
                Label("Products", systemImage: "pills")
             }
