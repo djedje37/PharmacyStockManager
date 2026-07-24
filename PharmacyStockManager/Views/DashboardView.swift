@@ -20,9 +20,9 @@ struct DashboardContentView: View {
             
             DashboardCardView(title: "Produits", value: "\(dashboardData.productCount)", icon: "pills.fill", color: .blue)
             
-            DashboardCardView(title: "Valeur Achat", value: "\(dashboardData.stockValueAtCostFormatted)", icon: "eurosign.circle.fill", color: .green)
+            DashboardCardView(title: "Valeur Achat", value: "\(dashboardData.stockValueAtCost.fcfaToEuro.euroFormatted)", icon: "eurosign.circle.fill", color: .green)
             
-            DashboardCardView(title: "Valeur Vente", value: "\(dashboardData.stockValueAtRetail)", icon: "eurosign.circle.fill", color: .green)
+            DashboardCardView(title: "Valeur Vente", value: "\(dashboardData.stockValueAtRetail.fcfaToEuro.euroFormatted)", icon: "eurosign.circle.fill", color: .green)
             
 
             

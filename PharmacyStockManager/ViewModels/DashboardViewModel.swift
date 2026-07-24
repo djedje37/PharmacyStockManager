@@ -14,7 +14,7 @@ class DashboardViewModel : ObservableObject {
    
    private let dashboardService : DashboardService
    
-   var state: DashboardState = .loading
+   var state: ViewState<DashboardData>  = .loading
    init(dashboardService: DashboardService) {
       self.dashboardService = dashboardService
    }
