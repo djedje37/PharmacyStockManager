@@ -33,6 +33,7 @@
 		17F475F43010F45200CCCF1B /* Exceptions for "PharmacyStockManager" folder in "PharmacyStockManagerTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Views/FilterChip.swift,
 				Views/StockMovement/StockMovementRowView.swift,
 			);
 			target = 1721DDFD2FFD0728009C1E74 /* PharmacyStockManagerTests */;
@@ -40,6 +41,7 @@
 		17F475F53010F45200CCCF1B /* Exceptions for "PharmacyStockManager" folder in "PharmacyStockManagerUITests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Views/FilterChip.swift,
 				Views/StockMovement/StockMovementRowView.swift,
 			);
 			target = 1721DE072FFD0728009C1E74 /* PharmacyStockManagerUITests */;

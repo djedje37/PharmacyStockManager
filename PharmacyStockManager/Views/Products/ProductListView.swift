@@ -13,9 +13,28 @@ struct ProductListView: View {
    init(dependencyContainer: AppDependencyContainer) {
       _viewModel = State(wrappedValue: dependencyContainer.makeProductListViewModel())
    }
+   
+   private var filterChips: some View {
+       ScrollView(.horizontal, showsIndicators: false) {
+           HStack(spacing: 8) {
+               ForEach(ProductFilter.allCases, id: \.self) { filter in
+                   FilterChip(
+                       title: filter.rawValue,
+                       isSelected: viewModel.activeFilter == filter
+                   ) {
+                       viewModel.activeFilter = filter
+                   }
+               }
+           }
+           .padding(.horizontal)
+           .padding(.vertical, 8)
+       }
+   }
+   
    var body: some View {
       NavigationStack {
          
+         filterChips
          Group {
             switch viewModel.state {
             case .loading:
@@ -47,14 +66,37 @@ struct ProductListView: View {
             ProductDetailView(product: product)
          }
          .searchable(text: $viewModel.searchText, prompt: "Rechercher un produit")
-         
+         .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+               Menu {
+                  Button("Toutes les catégories") {
+                     viewModel.selectedCategory = nil
+                  }
+                  
+                  Divider()
+                  
+                  ForEach(ProductCategory.allCases, id: \.self) { category in
+                     Button {
+                        viewModel.selectedCategory = category
+                     } label : {
+                        if (viewModel.selectedCategory == category) {
+                           Label(category.rawValue, systemImage: "checkmark")
+                        } else {
+                           Text(category.rawValue)
+                        }
+                     }
+                     
+                  }
+               } label: {
+                  Image(systemName: viewModel.selectedCategory == nil ? "line.3.horizontal.decrease.circle" : "line.3.horizontal.decrease.circle.fill")
+               }
+            }
+         }
       }
       .task {
          await viewModel.loadProducts()
       }
 
-         
-   
    }
 }
 
