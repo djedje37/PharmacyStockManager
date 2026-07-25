@@ -29,9 +29,30 @@
 		1721DE082FFD0728009C1E74 /* PharmacyStockManagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PharmacyStockManagerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		17F475F43010F45200CCCF1B /* Exceptions for "PharmacyStockManager" folder in "PharmacyStockManagerTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Views/StockMovement/StockMovementRowView.swift,
+			);
+			target = 1721DDFD2FFD0728009C1E74 /* PharmacyStockManagerTests */;
+		};
+		17F475F53010F45200CCCF1B /* Exceptions for "PharmacyStockManager" folder in "PharmacyStockManagerUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Views/StockMovement/StockMovementRowView.swift,
+			);
+			target = 1721DE072FFD0728009C1E74 /* PharmacyStockManagerUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1721DDF12FFD0723009C1E74 /* PharmacyStockManager */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				17F475F43010F45200CCCF1B /* Exceptions for "PharmacyStockManager" folder in "PharmacyStockManagerTests" target */,
+				17F475F53010F45200CCCF1B /* Exceptions for "PharmacyStockManager" folder in "PharmacyStockManagerUITests" target */,
+			);
 			path = PharmacyStockManager;
 			sourceTree = "<group>";
 		};

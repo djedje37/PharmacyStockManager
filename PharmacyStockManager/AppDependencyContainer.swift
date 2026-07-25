@@ -43,6 +43,9 @@ class AppDependencyContainer {
       ProductListViewModel(productRepository: productRepository)
    }
    
+   func makeStockMovementViewModel() -> StockMovementViewModel {
+      StockMovementViewModel(stockMovementRepository: stockMovementRepository)
+   }
 }
 
 extension AppDependencyContainer {

@@ -23,14 +23,14 @@ struct ContentView: View {
                Label("Products", systemImage: "pills")
             }
          
-         StockMovementView()
+         StockMovementView(dependencyContainer: appDependencyContainer)
             .tabItem {
-               Label("Movements", systemImage: "pills")
+               Label("Movements", systemImage: "arrow.up.arrow.down")
             }
          
          SettingsView()
             .tabItem {
-               Label("Settings", systemImage: "settings")
+               Label("Settings", systemImage: "gear")
             }
          
       }
