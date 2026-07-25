@@ -15,6 +15,9 @@ class ProductListViewModel {
    
    private let productRepository : ProductRepository
    var state: ViewState<[Product]> = .loading
+   
+   var searchText: String = ""
+   
    init(productRepository: ProductRepository) {
       self.productRepository = productRepository
    }
@@ -26,6 +29,22 @@ class ProductListViewModel {
          
       } catch {
          state = .error(error.localizedDescription)
+      }
+   }
+
+   var filterProducts: [Product] {
+      guard case .loaded(let products) = state else {
+         return []
+      }
+
+      if searchText.isEmpty {
+         return products
+      } else {
+         return products.filter {
+            $0.name.localizedCaseInsensitiveContains(searchText) ||
+            $0.cip.contains(searchText)
+            
+         }
       }
    }
 
