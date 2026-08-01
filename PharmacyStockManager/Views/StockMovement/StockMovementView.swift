@@ -10,9 +10,12 @@ import SwiftUI
 struct StockMovementView: View {
    
    @State private var viewModel : StockMovementViewModel
+   @State private var showingAddMovement = false
+   let makeAddMovementView: () -> AddStockMovementView
    
    init(dependencyContainer : AppDependencyContainer) {
       _viewModel = State(wrappedValue: dependencyContainer.makeStockMovementViewModel())
+      self.makeAddMovementView = { AddStockMovementView(dependencyContainer: dependencyContainer) }
    }
     var body: some View {
        NavigationStack {
@@ -35,14 +38,28 @@ struct StockMovementView: View {
              }
           }
           .navigationTitle("Mouvements")
+          .toolbar {
+              ToolbarItem(placement: .navigationBarTrailing) {
+                 Button {
+                    // action
+                    showingAddMovement = true
+                 } label : {
+                    Image(systemName: "plus")
+                 }
+              }
+
+          }
           
        }
+      .sheet(isPresented: $showingAddMovement) {
+         makeAddMovementView()
+      }
        .task {
           await viewModel.loadMovements()
        }
     }
 }
 
-#Preview {
+/*#Preview {
     StockMovementView(dependencyContainer: .preview)
-}
+}*/

@@ -34,6 +34,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Views/FilterChip.swift,
+				Views/StockMovement/AddStockMovementView.swift,
 				Views/StockMovement/StockMovementRowView.swift,
 			);
 			target = 1721DDFD2FFD0728009C1E74 /* PharmacyStockManagerTests */;
@@ -42,6 +43,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Views/FilterChip.swift,
+				Views/StockMovement/AddStockMovementView.swift,
 				Views/StockMovement/StockMovementRowView.swift,
 			);
 			target = 1721DE072FFD0728009C1E74 /* PharmacyStockManagerUITests */;

@@ -33,6 +33,9 @@ class AppDependencyContainer {
            batchRepository: batchRepository,
            stockMovementRepository: stockMovementRepository
       )
+   
+   
+   private lazy var stockService: StockService = StockService(batchRepository: batchRepository, movementRepository: stockMovementRepository, modelContext: modelContext)
    // MARK: - Factories for ViewModels
 
    func makeDashboardViewModel() -> DashboardViewModel {
@@ -45,6 +48,10 @@ class AppDependencyContainer {
    
    func makeStockMovementViewModel() -> StockMovementViewModel {
       StockMovementViewModel(stockMovementRepository: stockMovementRepository)
+   }
+   
+   func makeAddMovementViewModel() -> AddMovementViewModel {
+       AddMovementViewModel(stockService: stockService)
    }
 }
 
