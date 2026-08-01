@@ -19,7 +19,7 @@ class StockMovement {
    var type: MovementType
    var quantity: Int
    var date: Date
-   var product: Product?
+   var product: Product? // link to product instead of batch because batch => stockmovement rely to only one batch wheareas in real pharmaceutical like a movement can be rely to many batches
    
    init(type: MovementType, quantity: Int, date: Date = Date(), product: Product? = nil) {
        self.type = type
