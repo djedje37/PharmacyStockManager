@@ -51,7 +51,11 @@ struct StockMovementView: View {
           }
           
        }
-      .sheet(isPresented: $showingAddMovement) {
+      .sheet(isPresented: $showingAddMovement, onDismiss: {
+         Task {
+            await viewModel.loadMovements()
+         }
+      }) {
          makeAddMovementView()
       }
        .task {
