@@ -18,6 +18,10 @@ class StockMovementRepository {
       try context.fetch(FetchDescriptor<StockMovement>())
    }
    
+   func insert(movement: StockMovement) {
+      context.insert(movement)
+   }
+   
    /// retrieve the last stock movements
    ///  Parameters:
    ///   - number: Int , correspond to th number of stock movement we want

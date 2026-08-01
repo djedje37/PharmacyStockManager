@@ -18,6 +18,10 @@ class BatchRepository {
       try context.fetch(FetchDescriptor<Batch>())
    }
    
+   func insert(batch: Batch) {
+      context.insert(batch)
+   }
+   
    /// retrieve batches which will be expired soon
    ///  Parameters:
    ///   - days: Int, limit in number of day
