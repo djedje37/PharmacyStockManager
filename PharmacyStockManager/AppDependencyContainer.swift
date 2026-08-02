@@ -53,6 +53,14 @@ class AppDependencyContainer {
    func makeAddMovementViewModel() -> AddMovementViewModel {
        AddMovementViewModel(stockService: stockService)
    }
+   
+   func makeProductFormViewModel(product: Product? = nil) -> ProductFormViewModel {
+      ProductFormViewModel(
+           productRepository: productRepository,
+           existingProduct: product
+       )
+   }
+   
 }
 
 extension AppDependencyContainer {

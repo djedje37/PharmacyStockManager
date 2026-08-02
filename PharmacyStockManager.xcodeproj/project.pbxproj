@@ -33,6 +33,7 @@
 		17F475F43010F45200CCCF1B /* Exceptions for "PharmacyStockManager" folder in "PharmacyStockManagerTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				ViewModels/ProductFormViewModel.swift,
 				Views/FilterChip.swift,
 				Views/StockMovement/AddStockMovementView.swift,
 				Views/StockMovement/StockMovementRowView.swift,
@@ -42,6 +43,7 @@
 		17F475F53010F45200CCCF1B /* Exceptions for "PharmacyStockManager" folder in "PharmacyStockManagerUITests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				ViewModels/ProductFormViewModel.swift,
 				Views/FilterChip.swift,
 				Views/StockMovement/AddStockMovementView.swift,
 				Views/StockMovement/StockMovementRowView.swift,

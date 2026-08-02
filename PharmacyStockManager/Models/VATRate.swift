@@ -18,4 +18,11 @@ enum VATRate: Int, Codable, CaseIterable {
         case .standard: return 18
         }
     }
+   
+   var displayLabel: String {
+      switch self {
+      case .exempt: return "Exonéré"
+      case .standard: return "18%"
+      }
+   }
 }

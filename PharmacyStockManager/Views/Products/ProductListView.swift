@@ -10,8 +10,16 @@ import SwiftUI
 struct ProductListView: View {
    
    @State private var viewModel : ProductListViewModel
+   @State private var showingAddProduct : Bool = false
+   
+   
+   let makeProductFormView: (Product?) -> ProductFormView
+   
    init(dependencyContainer: AppDependencyContainer) {
       _viewModel = State(wrappedValue: dependencyContainer.makeProductListViewModel())
+      self.makeProductFormView = { product in
+         ProductFormView(dependencyContainer: dependencyContainer, product: product)
+      }
    }
    
    private var filterChips: some View {
@@ -67,6 +75,16 @@ struct ProductListView: View {
          }
          .searchable(text: $viewModel.searchText, prompt: "Rechercher un produit")
          .toolbar {
+            
+            ToolbarItem(placement: .topBarLeading) {
+               Button {
+                  // action
+                  showingAddProduct = true
+               } label : {
+                  Image(systemName: "plus")
+               }
+            }
+            
             ToolbarItem(placement: .topBarTrailing) {
                Menu {
                   Button("Toutes les catégories") {
@@ -92,6 +110,13 @@ struct ProductListView: View {
                }
             }
          }
+         .sheet(isPresented: $showingAddProduct, onDismiss: {
+            Task {
+               await viewModel.loadProducts()
+            }
+         }){
+            makeProductFormView(nil)
+         }
       }
       .task {
          await viewModel.loadProducts()
@@ -100,6 +125,7 @@ struct ProductListView: View {
    }
 }
 
-#Preview {
+/*#Preview {
    ProductListView(dependencyContainer: .preview)
 }
+*/
