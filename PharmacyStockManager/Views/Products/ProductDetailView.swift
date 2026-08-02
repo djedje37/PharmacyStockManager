@@ -7,6 +7,9 @@
 
 import SwiftUI
 struct ProductDetailView : View {
+   @State private var showEditProduct : Bool = false
+   let dependencyContainer: AppDependencyContainer
+
    let product: Product
    var body : some View {
       List {
@@ -91,9 +94,21 @@ struct ProductDetailView : View {
       }
       .navigationTitle(product.name)
       .navigationBarTitleDisplayMode(.inline)
+      .toolbar {
+         ToolbarItem(placement: .topBarTrailing) {
+            Button("Modifier") {
+               showEditProduct = true
+            }
+         }
+      }
+      .sheet(isPresented: $showEditProduct, onDismiss: {
+         
+      }, content: {
+         ProductFormView(dependencyContainer: dependencyContainer, product: product)
+      })
    }
 }
 
-#Preview {
+/*#Preview {
    ProductDetailView(product: Product(cip: "8431225", name: "FEVAROL 500/2MG/5MG PL/4", category: ProductCategory.autre, reimbursementBase: 0, vatRate: VATRate.exempt, geoCode: "OT1", publicPrice: 25000.0, alertThreshold: 12))
-}
+}*/

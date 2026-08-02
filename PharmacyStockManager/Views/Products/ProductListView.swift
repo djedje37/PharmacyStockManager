@@ -14,9 +14,12 @@ struct ProductListView: View {
    
    
    let makeProductFormView: (Product?) -> ProductFormView
-   
+   let dependencyContainer : AppDependencyContainer
    init(dependencyContainer: AppDependencyContainer) {
       _viewModel = State(wrappedValue: dependencyContainer.makeProductListViewModel())
+      
+      
+      self.dependencyContainer = dependencyContainer
       self.makeProductFormView = { product in
          ProductFormView(dependencyContainer: dependencyContainer, product: product)
       }
@@ -71,7 +74,7 @@ struct ProductListView: View {
          }
          .navigationTitle("ProductList")
          .navigationDestination(for: Product.self) { product in
-            ProductDetailView(product: product)
+            ProductDetailView(dependencyContainer: dependencyContainer, product: product)
          }
          .searchable(text: $viewModel.searchText, prompt: "Rechercher un produit")
          .toolbar {
