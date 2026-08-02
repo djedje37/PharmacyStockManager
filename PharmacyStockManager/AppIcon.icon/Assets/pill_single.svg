@@ -1,0 +1,8 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Single capsule, rotated 45°, style close to SF Symbol "pill.fill" -->
+  <g transform="rotate(-45 512 512)">
+    <rect x="152" y="362" width="720" height="300" rx="150" ry="150" fill="#FFFFFF"/>
+    <!-- two-tone split down the middle -->
+    <path d="M 152 362 H 512 V 662 H 152 A 150 150 0 0 1 152 362 Z" fill="#FF7A5C"/>
+  </g>
+</svg>
