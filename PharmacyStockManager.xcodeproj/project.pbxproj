@@ -30,6 +30,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		17637092302763BF00F15C45 /* Exceptions for "PharmacyStockManager" folder in "PharmacyStockManager" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 1721DDEE2FFD0723009C1E74 /* PharmacyStockManager */;
+		};
 		17F475F43010F45200CCCF1B /* Exceptions for "PharmacyStockManager" folder in "PharmacyStockManagerTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -56,6 +63,7 @@
 		1721DDF12FFD0723009C1E74 /* PharmacyStockManager */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				17637092302763BF00F15C45 /* Exceptions for "PharmacyStockManager" folder in "PharmacyStockManager" target */,
 				17F475F43010F45200CCCF1B /* Exceptions for "PharmacyStockManager" folder in "PharmacyStockManagerTests" target */,
 				17F475F53010F45200CCCF1B /* Exceptions for "PharmacyStockManager" folder in "PharmacyStockManagerUITests" target */,
 			);
@@ -427,9 +435,9 @@
 				DEVELOPMENT_TEAM = UBD46A3FMB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PharmacyStockManager/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -459,9 +467,9 @@
 				DEVELOPMENT_TEAM = UBD46A3FMB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PharmacyStockManager/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
