@@ -22,4 +22,13 @@ extension Double {
         formatter.locale = Locale(identifier: "fr_FR")
         return formatter.string(from: NSNumber(value: self)) ?? "\(self)"
     }
+   
+   var euroFormattedInt: String {
+       let formatter = NumberFormatter()
+       formatter.numberStyle = .currency
+       formatter.currencyCode = "EUR"
+       formatter.locale = Locale(identifier: "fr_FR")
+       formatter.maximumFractionDigits = 0
+       return formatter.string(from: NSNumber(value: Int(self))) ?? "\(self)"
+   }
 }
