@@ -99,7 +99,9 @@ struct ProductListView: View {
                
             }
          }
-         .navigationTitle("ProductList")
+         .background(Color(.systemGroupedBackground))
+         .navigationTitle("Produits")
+         .navigationBarTitleDisplayMode(.inline)
          .navigationDestination(for: Product.self) { product in
             ProductDetailView(dependencyContainer: dependencyContainer, product: product)
          }
