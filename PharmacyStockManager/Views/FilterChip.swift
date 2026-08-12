@@ -17,12 +17,11 @@ struct FilterChip: View {
        
        Button(action: action) {
           Text(title)
-             .font(.caption.weight(.medium))
+             .font(.subheadline.weight(.medium))
              .padding(.horizontal, 12)
              .padding(.vertical, 6)
-             .background(isSelected ? Color.primary : Color(.systemBackground))
-             .foregroundColor(isSelected ? Color(.systemBackground) : .primary)
-             .clipShape(Capsule())
+             .background(isSelected ? Color.accentColor : Color(.secondarySystemGroupedBackground), in: Capsule())
+             .foregroundColor(isSelected ? .white : .primary)
           
        }
        .buttonStyle(.plain)
