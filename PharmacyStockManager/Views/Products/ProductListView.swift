@@ -60,10 +60,17 @@ struct ProductListView: View {
 
    }
    
-           }
-           .padding(.horizontal)
-           .padding(.vertical, 8)
-       }
+   private var productList: some View {
+      List(viewModel.filterProducts) { product in
+         NavigationLink(value: product) {
+            ProductRowView(product: product)
+         }
+         .listRowBackground(RoundedRectangle(cornerRadius: 16)
+            .fill(Color(.secondarySystemGroupedBackground))
+            .padding(.vertical, 8))
+         .listRowSeparator(.hidden)
+      }
+      .listStyle(.plain)
    }
    
    var body: some View {
@@ -83,11 +90,7 @@ struct ProductListView: View {
                      ContentUnavailableView.search(text: viewModel.searchText)
                   }
                } else {
-                  List(viewModel.filterProducts) { product in
-                     NavigationLink(value: product){
-                        ProductRowView(product: product)
-                     }
-                  }
+                  productList
                }
                
              //  .listStyle(.plain)
