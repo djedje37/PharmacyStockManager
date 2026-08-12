@@ -26,16 +26,40 @@ struct ProductListView: View {
    }
    
    private var filterChips: some View {
-       ScrollView(.horizontal, showsIndicators: false) {
-           HStack(spacing: 8) {
-               ForEach(ProductFilter.allCases, id: \.self) { filter in
-                   FilterChip(
-                       title: filter.rawValue,
-                       isSelected: viewModel.activeFilter == filter
-                   ) {
-                       viewModel.activeFilter = filter
-                   }
+      ScrollViewReader { proxy in
+         ScrollView(.horizontal, showsIndicators: false) {
+             HStack(spacing: 8) {
+                 ForEach(ProductFilter.allCases, id: \.self) { filter in
+                     FilterChip(
+                         title: filter.rawValue,
+                         isSelected: viewModel.activeFilter == filter
+                     ) {
+                         viewModel.activeFilter = filter
+                     }
+                 }
+             }
+             .padding(.horizontal, 16)
+             .padding(.vertical, 8)
+         }
+         .onChange(of: viewModel.activeFilter, { _, newFilter in
+            withAnimation(.easeInOut(duration: 0.3)) {
+               proxy.scrollTo(newFilter, anchor: .center)
+            }
+            
+            
+         })
+         .onAppear() {
+            DispatchQueue.main.async {
+               withAnimation(.easeInOut(duration: 0.3)) {
+                  proxy.scrollTo(viewModel.activeFilter, anchor: .center)
                }
+            }
+         }
+         
+      }
+
+   }
+   
            }
            .padding(.horizontal)
            .padding(.vertical, 8)
