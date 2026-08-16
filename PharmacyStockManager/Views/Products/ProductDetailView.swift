@@ -35,8 +35,10 @@ struct ProductDetailView : View {
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
          ToolbarItem(placement: .topBarTrailing) {
-            Button("Modifier") {
+            Button {
                showEditProduct = true
+            } label : {
+               Image(systemName: "pencil")
             }
          }
       }
