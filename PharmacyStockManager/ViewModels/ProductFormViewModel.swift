@@ -103,7 +103,7 @@ class ProductFormViewModel : ObservableObject {
          throw ProductError.duplicateCip
       }
       
-      let product = Product(cip: cip, name: name, category: category, reimbursementBase: reimbursementBase, vatRate: vatRate, geoCode: geoCode.isEmpty ? nil : geoCode, publicPrice: publicPrice, alertThreshold: alertThreshold)
+      let product = Product(cip: cip, name: name, category: category, reimbursementBase: reimbursementBase.euroToFcfa, vatRate: vatRate, geoCode: geoCode.isEmpty ? nil : geoCode, publicPrice: publicPrice.euroToFcfa, alertThreshold: alertThreshold)
       
       try productRepository.add(product)
    }
@@ -112,11 +112,11 @@ class ProductFormViewModel : ObservableObject {
    private func update(product: Product) throws {
       product.name = name
       product.category = category
-      product.publicPrice = publicPrice
+      product.publicPrice = publicPrice.euroToFcfa
       product.vatRate = vatRate
       product.geoCode = geoCode.isEmpty ? nil : geoCode
       product.alertThreshold = alertThreshold
-      product.reimbursementBase = reimbursementBase
+      product.reimbursementBase = reimbursementBase.euroToFcfa
 
       try productRepository.save()
    }
