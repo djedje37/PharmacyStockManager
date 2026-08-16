@@ -15,6 +15,10 @@ extension Double {
       self / Self.fcfaToEuroRate
    }
    
+   var euroToFcfa : Double {
+      self * Self.fcfaToEuroRate
+   }
+   
     var euroFormatted: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
