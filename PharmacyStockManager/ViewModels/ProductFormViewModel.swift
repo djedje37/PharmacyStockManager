@@ -46,6 +46,7 @@ class ProductFormViewModel : ObservableObject {
    var isEditing: Bool { existingProduct != nil }
    var navigationTitle: String { isEditing ? "Modifier le produit" : "Nouveau produit" }
 
+   var isSubmitDisabled : Bool { cip.isEmpty || name.isEmpty }
    init(productRepository: ProductRepository, existingProduct: Product? = nil) {
       self.productRepository = productRepository
       self.existingProduct = existingProduct

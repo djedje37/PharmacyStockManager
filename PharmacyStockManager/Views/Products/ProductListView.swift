@@ -138,7 +138,9 @@ struct ProductListView: View {
                      
                   }
                } label: {
-                  Image(systemName: viewModel.selectedCategory == nil ? "line.3.horizontal.decrease.circle" : "line.3.horizontal.decrease.circle.fill")
+                  Image(systemName: "line.3.horizontal.decrease")
+                     .foregroundStyle(viewModel.selectedCategory == nil ? .primary : Color.accentColor)
+                     .foregroundStyle(viewModel.selectedCategory == nil ? .primary : Color.accentColor)
                }
             }
          }

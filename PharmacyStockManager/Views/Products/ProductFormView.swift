@@ -21,76 +21,120 @@ struct ProductFormView: View {
                stockSection
                errorSection
            }
-           .navigationTitle(viewModel.navigationTitle)
            .toolbar {
               ToolbarItem(placement: .confirmationAction) {
-                 Button("Enregistrer") {
+                 Button {
                     if viewModel.submit() {
-                       
                        dismiss()
                     }
+                 } label: {
+                    Image(systemName: "checkmark")
+                       .foregroundStyle(.white)
                  }
-                 .fontWeight(.semibold)
+                 .buttonStyle(.borderedProminent)
+                 .disabled(viewModel.isSubmitDisabled)
               }
               ToolbarItem(placement: .cancellationAction) {
-                 Button("Annuler") { dismiss() }
+                 Button {
+                    dismiss()
+                    
+                 } label: {
+                    Image(systemName: "xmark")
+                 }
               }
          }
        }
+       .formStyle(.grouped)
+       .scrollDismissesKeyboard(.interactively)
+       .scrollContentBackground(.hidden)
+       .navigationTitle(viewModel.navigationTitle)
+       .navigationBarTitleDisplayMode(.inline)
+       .background(Color(.systemGroupedBackground))
     }
 }
 private extension ProductFormView {
    var informationSection: some View {
       Section("Informations") {
-         TextField("Nom", text: $viewModel.name)
-         
-         TextField("CIP", text: $viewModel.cip)
-            .disabled(viewModel.isEditing)
-         
-         Picker("Catégorie", selection: $viewModel.category) {
-            
-            ForEach(ProductCategory.allCases, id: \.self) {
-               
-               Text($0.rawValue)
-                  .tag($0)
-               
-            }
-            
+         LabeledContent("Nom") {
+            TextField("", text: $viewModel.name)
+               .multilineTextAlignment(.trailing)
+               .lineLimit(1)
+               .submitLabel(.next)
          }
+         
+         LabeledContent("CIP") {
+            TextField("", text: $viewModel.cip)
+               .multilineTextAlignment(.trailing)
+               .lineLimit(1)
+               .submitLabel(.next)
+               .disabled(viewModel.isEditing)
+         }
+         
+         LabeledContent("Catégorie") {
+            Picker("", selection: $viewModel.category) {
+               ForEach(ProductCategory.allCases, id: \.self) {
+                  Text($0.rawValue)
+                     .tag($0)
+               }
+            }
+
+         }
+         
+         
+         
+         
       }
    }
 
    var pricingSection: some View {
        Section("Prix") {
-          TextField("Prix de vente", value: $viewModel.publicPrice, format: .number)
-             .keyboardType(.decimalPad)
-
-          Picker("TVA", selection: $viewModel.vatRate) {
-             ForEach(VATRate.allCases, id: \.self) {
-                Text($0.displayLabel)
-                   .tag($0)
-              }
+          LabeledContent("Prix de vente") {
+             TextField("0", value: $viewModel.publicPrice, format: .currency(code: "EUR"))
+                .keyboardType(.decimalPad)
+                .multilineTextAlignment(.trailing)
+                .lineLimit(1)
+                .submitLabel(.next)
           }
-          if viewModel.vatRate != .exempt {
-             TextField("Base remboursement", value: $viewModel.reimbursementBase, format: .number)
+          
+
+          LabeledContent("TVA") {
+             Picker("TVA", selection: $viewModel.vatRate) {
+                ForEach(VATRate.allCases, id: \.self) {
+                   Text($0.displayLabel)
+                      .tag($0)
+                 }
+             }
+             .labelsHidden()
+          }
+          
+          LabeledContent("Base remboursement") {
+             TextField("0", value: $viewModel.reimbursementBase, format: .currency(code: "EUR"))
+                .multilineTextAlignment(.trailing)
+                .lineLimit(1)
                 .keyboardType(.decimalPad)
           }
        }
    }
 
    var stockSection: some View {
-       Section("Stock") {
-          TextField("Emplacement",text: $viewModel.geoCode)
-          Stepper("Seuil d'alerte : \(viewModel.alertThreshold)", value: $viewModel.alertThreshold, in: 0...100)
-       }
+      Section("Stock") {
+         LabeledContent("Emplacement") {
+            TextField("",text: $viewModel.geoCode)
+               .textInputAutocapitalization(.characters)
+               .multilineTextAlignment(.trailing)
+               .lineLimit(1)
+         }
+         Stepper("Seuil d'alerte : \(viewModel.alertThreshold)", value: $viewModel.alertThreshold, in: 0...100)
+      }
+         
    }
    
    @ViewBuilder
    var errorSection: some View {
       if let error = viewModel.errorMessage {
          Section {
-            Text(error)
-            .foregroundStyle(.red)
+            Label(error, systemImage: "exclamationmark.triangle.fill")
+               .foregroundStyle(.red)
          }
       }
    }
