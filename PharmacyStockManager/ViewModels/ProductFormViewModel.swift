@@ -62,8 +62,8 @@ class ProductFormViewModel : ObservableObject {
       name = product.name
       cip = product.cip
       category = product.category
-      publicPrice = product.publicPrice
-      reimbursementBase = product.reimbursementBase
+      publicPrice = product.publicPrice.fcfaToEuro
+      reimbursementBase = product.reimbursementBase.fcfaToEuro
       vatRate = product.vatRate
       geoCode = product.geoCode ?? ""
       alertThreshold = product.alertThreshold
