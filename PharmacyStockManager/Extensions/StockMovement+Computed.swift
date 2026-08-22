@@ -11,9 +11,9 @@ extension StockMovement {
    var icon : String {
       switch type {
       case .entry:
-         return "arrow.down.circle.fill"
+         return "arrow.down"
       case .exit:
-         return "arrow.up.circle.fill"
+         return "arrow.up"
       }
    }
    
@@ -27,12 +27,9 @@ extension StockMovement {
    }
    
    var quantityText : String {
-      switch type {
-      case .entry:
-         return "+\(quantity) unité(s)"
-      case .exit:
-         return "-\(quantity) unité(s)"
-      }
+      let unitLabel = quantity > 1 ? "unités" : "unité"
+      let sign = type == .entry ? "+" : "-"
+      return "\(sign)\(quantity)\n\(unitLabel)"
    }
    
    
@@ -46,6 +43,14 @@ extension StockMovement {
       }
    }
 
-   
-   
+}
+extension Array where Element == StockMovement {
+    func groupedByDay() -> [(date: Date, movements: [StockMovement])] {
+        let grouped = Dictionary(grouping: self) { movement in
+            Calendar.current.startOfDay(for: movement.date)
+        }
+        return grouped
+            .map { (date: $0.key, movements: $0.value) }
+            .sorted { $0.date > $1.date }
+    }
 }
