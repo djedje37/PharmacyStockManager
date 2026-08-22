@@ -27,6 +27,7 @@ class AddMovementViewModel {
    var errorMessage: String?
    
    
+   var isSubmitDisabled : Bool { selectedProduct == nil || quantity < 1 }
    init(stockService: StockService) {
       self.stockService = stockService
    }

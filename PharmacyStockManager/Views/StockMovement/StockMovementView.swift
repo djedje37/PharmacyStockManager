@@ -38,8 +38,11 @@ struct StockMovementView: View {
              }
           }
           .navigationTitle("Mouvements")
+          .background(Color(.systemGroupedBackground))
+          .navigationBarTitleDisplayMode(.inline)
+          
           .toolbar {
-              ToolbarItem(placement: .navigationBarTrailing) {
+              ToolbarItem(placement: .navigationBarLeading) {
                  Button {
                     // action
                     showingAddMovement = true
