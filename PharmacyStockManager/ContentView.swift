@@ -28,10 +28,10 @@ struct ContentView: View {
                Label("Movements", systemImage: "arrow.up.arrow.down")
             }
          
-         SettingsView()
+        /* SettingsView()
             .tabItem {
                Label("Settings", systemImage: "gear")
-            }
+            }*/
          
       }
    }
