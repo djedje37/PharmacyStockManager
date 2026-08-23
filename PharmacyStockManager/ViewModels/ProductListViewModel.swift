@@ -27,7 +27,7 @@ class ProductListViewModel {
    var activeFilter: ProductFilter = .reimbursed
    
    var selectedCategory: ProductCategory? // nil => all catgories
-   
+   var errorMessage: String?
    init(productRepository: ProductRepository) {
       self.productRepository = productRepository
    }
@@ -39,6 +39,15 @@ class ProductListViewModel {
          
       } catch {
          state = .error(error.localizedDescription)
+      }
+   }
+   
+   func deleteProduct(_ product: Product) async {
+      do {
+         try productRepository.delete(product)
+         await loadProducts()
+      } catch {
+         errorMessage = "Impossible de supprimer le produit."
       }
    }
 

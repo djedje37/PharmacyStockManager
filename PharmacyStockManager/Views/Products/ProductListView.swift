@@ -12,6 +12,8 @@ struct ProductListView: View {
    @State private var viewModel : ProductListViewModel
    @State private var showingAddProduct : Bool = false
    
+   @State private var showingDeleteConfirmation : Bool = false
+   @State private var productToDelete: Product?
    
    let makeProductFormView: (Product?) -> ProductFormView
    let dependencyContainer : AppDependencyContainer
@@ -65,12 +67,37 @@ struct ProductListView: View {
          NavigationLink(value: product) {
             ProductRowView(product: product)
          }
+         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+            Button(role: .destructive) {
+               productToDelete = product
+               showingDeleteConfirmation = true
+              
+            } label : {
+               Label("Supprimer", systemImage: "trash")
+            }
+         }
+        
          .listRowBackground(RoundedRectangle(cornerRadius: 16)
             .fill(Color(.secondarySystemGroupedBackground))
             .padding(.vertical, 8))
          .listRowSeparator(.hidden)
       }
+ 
       .listStyle(.plain)
+      .alert("Supprimer ce produit ?", isPresented: $showingDeleteConfirmation) {
+         Button("Supprimer", role: .destructive) {
+            guard let product = productToDelete else {
+               return
+            }
+            Task {
+               await viewModel.deleteProduct(product)
+               productToDelete = nil
+            }
+         }
+         Button("Annuler", role: .cancel) {productToDelete = nil}
+      } message: {
+         Text("Cette action est irréversible et supprimera aussi tout l'historique de stock associé.")
+     }
    }
    
    var body: some View {
