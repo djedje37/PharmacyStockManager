@@ -11,11 +11,12 @@ struct StockMovementView: View {
    
    @State private var viewModel : StockMovementViewModel
    @State private var showingAddMovement = false
-   let makeAddMovementView: () -> AddStockMovementView
+   @State private var toast: ToastMessage?
    
+   let dependencyContainer : AppDependencyContainer
    init(dependencyContainer : AppDependencyContainer) {
       _viewModel = State(wrappedValue: dependencyContainer.makeStockMovementViewModel())
-      self.makeAddMovementView = { AddStockMovementView(dependencyContainer: dependencyContainer) }
+      self.dependencyContainer = dependencyContainer
    }
    
    private func sectionTitle(for date: Date) -> String {
@@ -85,8 +86,11 @@ struct StockMovementView: View {
             await viewModel.loadMovements()
          }
       }) {
-         makeAddMovementView()
+         AddStockMovementView(dependencyContainer: dependencyContainer) {
+            toast = .success("Mouvement enregistré")
+         }
       }
+      .toast($toast)
        .task {
           await viewModel.loadMovements()
        }

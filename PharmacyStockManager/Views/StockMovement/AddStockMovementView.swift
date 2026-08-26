@@ -12,14 +12,16 @@ struct AddStockMovementView: View {
    @Environment(\.dismiss) private var dismiss
    @State private var viewModel: AddMovementViewModel
    @Query private var products: [Product]
+   var onSaved: (() -> Void)?
    
-   init(dependencyContainer: AppDependencyContainer) {
+   init(dependencyContainer: AppDependencyContainer, onSaved: (() -> Void)? = nil) {
       _viewModel = State(wrappedValue: dependencyContainer.makeAddMovementViewModel())
       UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color.accentColor)
         // text color for selected/unselected states
         UISegmentedControl.appearance().setTitleTextAttributes(
             [.foregroundColor: UIColor(Color.white)], for: .selected
         )
+      self.onSaved = onSaved
    }
    
    var body: some View {
@@ -72,6 +74,7 @@ struct AddStockMovementView: View {
             ToolbarItem(placement: .confirmationAction) {
                Button {
                   if viewModel.submit() {
+                     onSaved?()
                      dismiss()
                   }
                } label : {
