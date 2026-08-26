@@ -10,8 +10,11 @@ import SwiftUI
 struct ProductFormView: View {
    @Environment(\.dismiss) private var dismiss
    @State private var viewModel : ProductFormViewModel
-   init(dependencyContainer: AppDependencyContainer, product: Product? = nil) {
+   //@State private var toast: ToastMessage?
+   var onSaved: (() -> Void)?
+   init(dependencyContainer: AppDependencyContainer, product: Product? = nil, onSaved: (() -> Void)? = nil) {
       _viewModel = State(wrappedValue: dependencyContainer.makeProductFormViewModel(product: product))
+      self.onSaved = onSaved
    }
     var body: some View {
        NavigationStack {
@@ -25,6 +28,7 @@ struct ProductFormView: View {
               ToolbarItem(placement: .confirmationAction) {
                  Button {
                     if viewModel.submit() {
+                       onSaved?()
                        dismiss()
                     }
                  } label: {

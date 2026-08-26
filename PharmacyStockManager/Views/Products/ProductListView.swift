@@ -15,16 +15,12 @@ struct ProductListView: View {
    @State private var showingDeleteConfirmation : Bool = false
    @State private var productToDelete: Product?
    
-   let makeProductFormView: (Product?) -> ProductFormView
+   @State private var toast: ToastMessage?
+   
    let dependencyContainer : AppDependencyContainer
    init(dependencyContainer: AppDependencyContainer) {
       _viewModel = State(wrappedValue: dependencyContainer.makeProductListViewModel())
-      
-      
       self.dependencyContainer = dependencyContainer
-      self.makeProductFormView = { product in
-         ProductFormView(dependencyContainer: dependencyContainer, product: product)
-      }
    }
    
    private var filterChips: some View {
@@ -91,6 +87,12 @@ struct ProductListView: View {
             }
             Task {
                await viewModel.deleteProduct(product)
+               if viewModel.errorMessage == nil {
+                  toast = .success("Produit supprimé")
+               } else {
+                  toast = .error(viewModel.errorMessage ?? "Erreur")
+                  viewModel.dismissError()
+              }
                productToDelete = nil
             }
          }
@@ -176,9 +178,12 @@ struct ProductListView: View {
                await viewModel.loadProducts()
             }
          }){
-            makeProductFormView(nil)
+            ProductFormView(dependencyContainer: dependencyContainer) {
+               toast = .success("Produit enregistré")
+           }
          }
       }
+      .toast($toast)
       .task {
          await viewModel.loadProducts()
       }

@@ -50,7 +50,9 @@ class ProductListViewModel {
          errorMessage = "Impossible de supprimer le produit."
       }
    }
-
+   func dismissError() {
+       errorMessage = nil
+   }
    var filterProducts: [Product] {
       guard case .loaded(let products) = state else {
          return []
